@@ -1,47 +1,44 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import { debounce } from "throttle-debounce";
-import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-// import getAll from './data';
-import ListBooks from "./ListBooks";
-import SearchBooks from "./SearchBooks";
+import React from "react";
+import { Route } from "react-router-dom";
+import BookList from "./Components/BookList";
+import * as BooksAPI from "./BooksAPI";
+import SearchBooks from "./Components/SearchBooks";
+import { debounce } from "throttle-debounce";
 
-class BooksApp extends Component {
-  bookshelves = [
+class App extends React.Component {
+  shelfStatus = [
     { key: "currentlyReading", name: "Currently Reading" },
     { key: "wantToRead", name: "Want to Read" },
     { key: "read", name: "Read" }
   ];
+
   state = {
-    myBooks: [],
+    bookList: [],
     searchBooks: []
   };
+
   componentDidMount = () => {
     BooksAPI.getAll().then((books) => {
-      this.setState({ myBooks: books });
+      this.setState({ bookList: books });
     });
   };
-  moveBook = (book, shelf) => {
-    // update db
-    BooksAPI.update(book, shelf);
-    // BooksAPI.update(book, shelf).then(books => {
-    //   console.log(books);
-    // });
 
-    let updatedBooks = [];
-    updatedBooks = this.state.myBooks.filter((b) => b.id !== book.id);
+  bookMoveToShelve = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+
+    let movedBook = this.state.bookList.filter((b) => b.id !== book.id);
 
     if (shelf !== "none") {
       book.shelf = shelf;
-      updatedBooks = updatedBooks.concat(book);
+      movedBook = movedBook.concat(book);
     }
 
-    // console.log('updated books len', updatedBooks.length);
     this.setState({
-      myBooks: updatedBooks
+      bookList: movedBook
     });
   };
+
   searchForBooks = debounce(300, false, (query) => {
     //console.log(query);
     if (query.length > 0) {
@@ -62,17 +59,17 @@ class BooksApp extends Component {
   };
 
   render() {
-    const { myBooks, searchBooks } = this.state;
+    const { bookList, searchBooks } = this.state;
     return (
       <div className="app">
         <Route
           exact
           path="/"
           render={() => (
-            <ListBooks
-              bookshelves={this.bookshelves}
-              books={myBooks}
-              onMove={this.moveBook}
+            <BookList
+              shelfStatus={this.shelfStatus}
+              bookList={bookList}
+              bookMoveToShelve={this.bookMoveToShelve}
             />
           )}
         />
@@ -81,9 +78,8 @@ class BooksApp extends Component {
           render={() => (
             <SearchBooks
               searchBooks={searchBooks}
-              myBooks={myBooks}
               onSearch={this.searchForBooks}
-              onMove={this.moveBook}
+              bookMoveToShelve={this.bookMoveToShelve}
               onResetSearch={this.resetSearch}
             />
           )}
@@ -93,4 +89,4 @@ class BooksApp extends Component {
   }
 }
 
-export default BooksApp;
+export default App;
