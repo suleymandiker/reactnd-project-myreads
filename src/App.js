@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 import BookList from "./Components/BookList";
 import * as BooksAPI from "./BooksAPI";
 import SearchBooks from "./Components/SearchBooks";
-import { debounce } from "throttle-debounce";
 
 class App extends React.Component {
   shelfStatus = [
@@ -15,7 +14,7 @@ class App extends React.Component {
 
   state = {
     bookList: [],
-    searchBooks: []
+    searchList: []
   };
 
   componentDidMount = () => {
@@ -39,27 +38,26 @@ class App extends React.Component {
     });
   };
 
-  searchForBooks = debounce(300, false, (query) => {
-    //console.log(query);
+  searchQuery = (query) => {
     if (query.length > 0) {
       BooksAPI.search(query).then((books) => {
-        //   console.log('result', books);
         if (books.error) {
-          this.setState({ searchBooks: [] });
+          this.setState({ searchList: [] });
         } else {
-          this.setState({ searchBooks: books });
+          this.setState({ searchList: books });
         }
       });
     } else {
-      this.setState({ searchBooks: [] });
+      this.setState({ searchList: [] });
     }
-  });
-  resetSearch = () => {
-    this.setState({ searchBooks: [] });
+  };
+
+  removeSearchList = () => {
+    this.setState({ searchList: [] });
   };
 
   render() {
-    const { bookList, searchBooks } = this.state;
+    const { bookList, searchList } = this.state;
     return (
       <div className="app">
         <Route
@@ -77,10 +75,10 @@ class App extends React.Component {
           path="/search"
           render={() => (
             <SearchBooks
-              searchBooks={searchBooks}
-              onSearch={this.searchForBooks}
+              searchList={searchList}
+              searchQuery={this.searchQuery}
               bookMoveToShelve={this.bookMoveToShelve}
-              onResetSearch={this.resetSearch}
+              removeSearchList={this.removeSearchList}
             />
           )}
         />

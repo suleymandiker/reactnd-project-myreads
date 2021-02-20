@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchList from "./SearchList";
-import BooksAPI from "../BooksAPI";
 
 class SearchBooks extends React.Component {
   state = {
@@ -9,41 +8,35 @@ class SearchBooks extends React.Component {
   };
 
   handleChange = (event) => {
-    // this.setState({ value: event.target.value });
     const searchInputValue = event.target.value;
     this.setState({ value: searchInputValue }, () => {
-      // console.log(searchInputValue);
-
-      // if (val.length >= 1) {
-      this.props.onSearch(searchInputValue);
-      // }
+      this.props.searchQuery(searchInputValue);
     });
   };
 
   render() {
-    const { searchBooks, bookMoveToShelve, onResetSearch } = this.props;
+    const { searchList, bookMoveToShelve, removeSearchList } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/">
-            <button className="close-search" onClick={onResetSearch}>
+            <button className="close-search" onClick={removeSearchList}>
               Close
             </button>
           </Link>
           <input
             type="text"
             value={this.state.value}
-            placeholder="Search Something"
+            placeholder="Search"
             onChange={this.handleChange}
             autoFocus
           />
-          <SearchList
-            searchBooks={searchBooks}
-            bookMoveToShelve={bookMoveToShelve}
-            onResetSearch={onResetSearch}
-          />
-          {console.log(searchBooks)}
         </div>
+        <SearchList
+          searchList={searchList}
+          bookMoveToShelve={bookMoveToShelve}
+          removeSearchList={removeSearchList}
+        />
       </div>
     );
   }

@@ -2,11 +2,11 @@ import React from "react";
 import Book from "./Book";
 
 const SearchList = (props) => {
-  const { searchBooks, bookMoveToShelve, onResetSearch } = props;
+  const { searchList, bookMoveToShelve } = props;
   return (
     <div className="search-books-results">
       <ol className="books-grid">
-        {searchBooks.map((book) => (
+        {searchList.map((book) => (
           <Book
             key={book.id}
             book={book}
