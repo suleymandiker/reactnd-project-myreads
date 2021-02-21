@@ -76,6 +76,7 @@ class App extends React.Component {
           render={() => (
             <SearchBooks
               searchList={searchList}
+              bookList={bookList}
               searchQuery={this.searchQuery}
               bookMoveToShelve={this.bookMoveToShelve}
               removeSearchList={this.removeSearchList}

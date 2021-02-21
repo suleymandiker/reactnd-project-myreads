@@ -13,24 +13,24 @@ To get started developing right away:
 
 ## What You're Getting
 ```bash
-+¦¦ CONTRIBUTING.md
-+¦¦ README.md - This file.
-+¦¦ SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
-+¦¦ package.json # npm package manager file. It's unlikely that you'll need to modify this.
-+¦¦ public
--   +¦¦ favicon.ico # React Icon, You may change if you wish.
--   L¦¦ index.html # DO NOT MODIFY
-L¦¦ src
-    +¦¦ App.css # Styles for your app. Feel free to customize this as you desire.
-    +¦¦ App.js # This is the root of your app. Contains static HTML right now.
-    +¦¦ App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
-    +¦¦ BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    +¦¦ icons # Helpful images for your app. Use at your discretion.
-    -   +¦¦ add.svg
-    -   +¦¦ arrow-back.svg
-    -   L¦¦ arrow-drop-down.svg
-    +¦¦ index.css # Global styles. You probably won't need to change anything here.
-    L¦¦ index.js # You should not need to modify this file. It is used for DOM rendering only.
++ï¿½ï¿½ CONTRIBUTING.md
++ï¿½ï¿½ README.md - This file.
++ï¿½ï¿½ SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
++ï¿½ï¿½ package.json # npm package manager file. It's unlikely that you'll need to modify this.
++ï¿½ï¿½ public
+-ï¿½ï¿½ +ï¿½ï¿½ favicon.ico # React Icon, You may change if you wish.
+-ï¿½ï¿½ Lï¿½ï¿½ index.html # DO NOT MODIFY
+Lï¿½ï¿½ src
+    +ï¿½ï¿½ App.css # Styles for your app. Feel free to customize this as you desire.
+    +ï¿½ï¿½ App.js # This is the root of your app. Contains static HTML right now.
+    +ï¿½ï¿½ App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
+    +ï¿½ï¿½ BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    +ï¿½ï¿½ icons # Helpful images for your app. Use at your discretion.
+    -ï¿½ï¿½ +ï¿½ï¿½ add.svg
+    -ï¿½ï¿½ +ï¿½ï¿½ arrow-back.svg
+    -ï¿½ï¿½ Lï¿½ï¿½ arrow-drop-down.svg
+    +ï¿½ï¿½ index.css # Global styles. You probably won't need to change anything here.
+    Lï¿½ï¿½ index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
 
 Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.

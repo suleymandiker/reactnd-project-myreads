@@ -15,7 +15,12 @@ class SearchBooks extends React.Component {
   };
 
   render() {
-    const { searchList, bookMoveToShelve, removeSearchList } = this.props;
+    const {
+      searchList,
+      bookList,
+      bookMoveToShelve,
+      removeSearchList
+    } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -34,6 +39,7 @@ class SearchBooks extends React.Component {
         </div>
         <SearchList
           searchList={searchList}
+          bookList={bookList}
           bookMoveToShelve={bookMoveToShelve}
           removeSearchList={removeSearchList}
         />
